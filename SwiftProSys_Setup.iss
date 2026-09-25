@@ -4,7 +4,7 @@
 ;
 ; HOW TO BUILD THE INSTALLER:
 ;   1. Install Inno Setup (free): https://jrsoftware.org/isdl.php
-;   2. First build the app .exe:  run build.bat  (creates dist\SwiftProSys_ImageEncryptor.exe)
+;   2. First build the app .exe:  run build.bat  (creates dist\SPS_TDM_Image_Encryptor_V_Alpha\ folder)
 ;   3. Open this file in Inno Setup and click "Compile"
 ;      (or run from command line: ISCC.exe SwiftProSys_Setup.iss)
 ;   4. The installer is created at: Output\SwiftProSys_ImageEncryptor_Setup.exe
@@ -15,9 +15,10 @@
 ; ============================================================================
 
 #define MyAppName "Swift-ProSys Image Encryption Studio"
-#define MyAppVersion "1.0.0"
+#define MyAppVersion "vAlpha"
 #define MyAppPublisher "Swift-ProSys"
-#define MyAppExeName "SwiftProSys_ImageEncryptor.exe"
+#define MyAppExeName "SPS_TDM_Image_Encryptor_V_Alpha.exe"
+#define MyAppDistFolder "SPS_TDM_Image_Encryptor_V_Alpha"
 
 [Setup]
 AppId={{8F2C9A6E-4B1D-4E7A-9C3F-6D2A8B1E5F40}
@@ -46,7 +47,7 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "Create a &desktop shortcut"; GroupDescription: "Additional shortcuts:"
 
 [Files]
-Source: "dist\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "dist\{#MyAppDistFolder}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"

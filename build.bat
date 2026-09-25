@@ -34,7 +34,7 @@ echo [3/4] Building the standalone .exe (this can take a few minutes)...
 echo.
 python build_exe.py
 
-if not exist "dist\SwiftProSys_ImageEncryptor.exe" (
+if not exist "dist\SPS_TDM_Image_Encryptor_V_Alpha\SPS_TDM_Image_Encryptor_V_Alpha.exe" (
     echo.
     echo [WARNING] .exe build failed or was not found in dist\.
     echo Scroll up for the PyInstaller error output.
@@ -99,8 +99,8 @@ if defined ISCC (
     echo ============================================================
 ) else (
     echo Inno Setup's compiler ^(ISCC.exe^) was not found automatically.
-    echo Your standalone app .exe is still ready to use:
-    echo   %cd%\dist\SwiftProSys_ImageEncryptor.exe
+    echo Your standalone app folder is still ready to use:
+    echo   %cd%\dist\SPS_TDM_Image_Encryptor_V_Alpha\SPS_TDM_Image_Encryptor_V_Alpha.exe
     echo.
     echo If Inno Setup IS installed on this PC but in a non-standard folder,
     echo you can still build the installer manually - this always works
@@ -128,11 +128,12 @@ if exist "Output\SwiftProSys_ImageEncryptor_Setup.exe" (
     echo   %cd%\Output\SwiftProSys_ImageEncryptor_Setup.exe
 ) else (
     echo No installer was built this time, so all you have is the plain
-    echo standalone .exe below. Sharing THIS file does NOT add a Start
-    echo Menu entry and does NOT show up in Control Panel to uninstall -
-    echo it just runs directly, like a portable app:
+    echo standalone build below. This is a --onedir build, so you must
+    echo share the WHOLE folder ^(not just the .exe^) - the app needs the
+    echo other files sitting next to it to run, and it does NOT add a
+    echo Start Menu entry or show up in Control Panel to uninstall:
     echo.
-    echo   %cd%\dist\SwiftProSys_ImageEncryptor.exe
+    echo   %cd%\dist\SPS_TDM_Image_Encryptor_V_Alpha\
     echo.
     echo For the full install experience ^(Start Menu + Control Panel
     echo uninstall^), install Inno Setup from https://jrsoftware.org/isdl.php
@@ -189,12 +190,12 @@ REM Decide which file to upload: installer is preferred, else standalone exe
 set "UPLOAD_FILE="
 if exist "Output\SwiftProSys_ImageEncryptor_Setup.exe" (
     set "UPLOAD_FILE=Output\SwiftProSys_ImageEncryptor_Setup.exe"
-) else if exist "dist\SwiftProSys_ImageEncryptor.exe" (
-    set "UPLOAD_FILE=dist\SwiftProSys_ImageEncryptor.exe"
 )
 
 if not defined UPLOAD_FILE (
-    echo [SKIP] No built .exe found to upload. Skipping GitHub release.
+    echo [SKIP] No installer found to upload. ^(--onedir builds are a folder,
+    echo        not a single portable .exe, so the installer is required
+    echo        for GitHub releases.^) Skipping GitHub release.
     goto :end
 )
 

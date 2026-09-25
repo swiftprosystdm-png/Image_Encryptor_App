@@ -13,7 +13,7 @@ ICO_PATH = os.path.join(BASE_DIR, "Swift_Prosys.ico")
 LOGO_PREVIEW = os.path.join(BASE_DIR, "Swift-ProSys-Logo-2026-1-removebg-preview.png")
 LOGO_FALLBACK = os.path.join(BASE_DIR, "Swift-ProSys-Logo.png")
 ENTRY_POINT = os.path.join(BASE_DIR, "encryptor_app.py")
-EXE_NAME = "SwiftProSys_ImageEncryptor"
+EXE_NAME = "SPS_TDM_Image_Encryptor_V_Alpha"
 
 
 def _kill_running_instances():
@@ -44,7 +44,7 @@ def build():
         print(f"Warning: Icon file not found: {ICO_PATH}")
 
     # Check if target dist exe is still locked
-    dist_exe = os.path.join(BASE_DIR, "dist", f"{EXE_NAME}.exe")
+    dist_exe = os.path.join(BASE_DIR, "dist", EXE_NAME, f"{EXE_NAME}.exe")
     if os.path.exists(dist_exe):
         try:
             with open(dist_exe, "a+b"):
@@ -58,7 +58,7 @@ def build():
     cmd = [
         sys.executable, "-m", "PyInstaller",
         "--noconfirm",
-        "--onefile",
+        "--onedir",
         "--windowed",
         f"--name={EXE_NAME}",
     ]
@@ -99,7 +99,7 @@ def build():
         print("\n[FAILED] PyInstaller build failed with exit code:", result.returncode)
         sys.exit(result.returncode)
 
-    dist_exe = os.path.join(BASE_DIR, "dist", f"{EXE_NAME}.exe")
+    dist_exe = os.path.join(BASE_DIR, "dist", EXE_NAME, f"{EXE_NAME}.exe")
     if os.path.exists(dist_exe):
         size_mb = os.path.getsize(dist_exe) / (1024 * 1024)
         print("\n" + "=" * 60)
